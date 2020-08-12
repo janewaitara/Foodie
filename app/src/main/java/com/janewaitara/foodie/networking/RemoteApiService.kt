@@ -12,7 +12,7 @@ interface RemoteApiService {
 
     //get random recipe
     @GET("recipes/random")
-    suspend fun getRecipes(
+    suspend fun getRandomRecipes(
         @Query("apiKey") apiKey: String,
         @Query("number") number: Int
     ): RandomRecipesResponse
@@ -49,7 +49,7 @@ interface RemoteApiService {
     //get ingredient substitutes
     @GET("food/ingredients/{ingredientId}/substitutes")
     suspend fun getIngredientSubstitute(
-        @Path("ingredientId") recipeId : Int,
+        @Path("ingredientId") ingredientId : Int,
         @Query("apiKey") apiKey: String
     ): IngredientSubstitutesResponse
 
