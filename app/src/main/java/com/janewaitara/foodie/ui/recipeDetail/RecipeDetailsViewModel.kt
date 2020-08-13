@@ -36,17 +36,20 @@ class RecipeDetailsViewModel (
      *
      * Help to communicate back when the save of a creature is complete
      * Save liveData property to handle communication*/
-    private val recipeInfoLiveData = MutableLiveData<RecipeInformationResponse>()
+    private val recipeDetailsLiveData = MutableLiveData<RecipeInformationResponse>()
 
-    fun getRecipeDetailsInfoRecipeLiveData(): LiveData<RecipeInformationResponse> = recipeInfoLiveData
+    fun getRecipeDetailsLiveData(): LiveData<RecipeInformationResponse> = recipeDetailsLiveData
 
-    suspend fun getRecipeDetailsFromApiUsingRecipeId(recipeId: Int){
-        val searchedRecipesInfo = remoteApi.getRecipeInformation(recipeId)
+    fun getRecipeDetailsFromApiUsingRecipeId(recipeId: Int){
+        viewModelScope.launch {
 
-        //Log.d("Recipe Information", searchedRecipesInfo.toString())
+            val searchedRecipesInfo = remoteApi.getRecipeInformation(recipeId)
 
-        if (searchedRecipesInfo is Success) {
-            recipeInfoLiveData.postValue(searchedRecipesInfo.data)
+            //Log.d("Recipe Information", searchedRecipesInfo.toString())
+
+            if (searchedRecipesInfo is Success) {
+                recipeDetailsLiveData.postValue(searchedRecipesInfo.data)
+            }
         }
     }
 
@@ -55,25 +58,29 @@ class RecipeDetailsViewModel (
 
     fun getSimilarRecipesLiveData(): LiveData<SimilarRecipeResponse> = similarRecipeLiveData
 
-    suspend fun getSimilarRecipe(recipeId: Int){
-        val similarRecipeList = remoteApi.getSimilarRecipe(recipeId)
+    fun getSimilarRecipe(recipeId: Int){
+        viewModelScope.launch {
+            val similarRecipeList = remoteApi.getSimilarRecipe(recipeId)
 
-        if (similarRecipeList is Success){
-            similarRecipeLiveData.postValue(similarRecipeList.data)
+            if (similarRecipeList is Success) {
+                similarRecipeLiveData.postValue(similarRecipeList.data)
+            }
         }
     }
 
 
-    /**LiveData member variable to cache the  ingredients substitute*/
+    /**LiveData member variable to cache the ingredients substitute*/
     private val ingredientSubstituteLiveData = MutableLiveData<IngredientSubstitutesResponse>()
 
     fun getIngredientSubstituteLiveData(): LiveData<SimilarRecipeResponse> = similarRecipeLiveData
 
-    suspend fun getIngredientSubstitute(ingredientId: Int){
-        val ingredientSubstitute = remoteApi.getIngredientSubstitutes(ingredientId)
+    fun getIngredientSubstitute(ingredientId: Int){
+        viewModelScope.launch {
+            val ingredientSubstitute = remoteApi.getIngredientSubstitutes(ingredientId)
 
-        if (ingredientSubstitute is Success){
-           ingredientSubstituteLiveData.postValue(ingredientSubstitute.data)
+            if (ingredientSubstitute is Success) {
+                ingredientSubstituteLiveData.postValue(ingredientSubstitute.data)
+            }
         }
     }
 
