@@ -25,7 +25,7 @@ class RecipeRepository(private val recipeDao: RecipeDao,
         recipeDao.getAllRandomRecipes()
 
 
-    fun getRecipeById(recipeId: Int): Recipe =
+    suspend fun getRecipeById(recipeId: Int): Recipe =
         recipeDao.getRecipeById(recipeId)
 
     suspend fun clearRecipes(){
@@ -33,7 +33,7 @@ class RecipeRepository(private val recipeDao: RecipeDao,
     }
     /**
      * Get random recipes from Api*/
-    suspend fun getRandomRecipesFromApi(){
+    suspend fun getRandomRecipesFromApiAndInsetIntoDb(){
         val randomRecipes = remoteApi.getRandomRecipes()
 
         return if (randomRecipes is Success){
