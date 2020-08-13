@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import com.janewaitara.foodie.di.databaseModule
 import com.janewaitara.foodie.di.networkModule
+import com.janewaitara.foodie.di.remoteApiModule
+import com.janewaitara.foodie.di.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -35,7 +37,9 @@ class RecipeApplication : Application() {
             modules(
                 listOf(
                     networkModule,
-                    databaseModule
+                    remoteApiModule,
+                    databaseModule,
+                    repositoryModule
                 )
             )
         }
