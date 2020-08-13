@@ -15,10 +15,8 @@ import org.koin.core.inject
 /**
  *Implement KoinComponent interface as a way to tell koin that it can inject fields into this class
  * (which is not a lifeCycle Class)*/
-class SynchronizeRecipeWorker(appContext: Context, workerParameters: WorkerParameters) :
-    CoroutineWorker(appContext, workerParameters), KoinComponent {
-
-    private val repository: RecipeRepository by inject()
+class SynchronizeRecipeWorker(appContext: Context, workerParameters: WorkerParameters, private val repository: RecipeRepository) :
+    CoroutineWorker(appContext, workerParameters) {
 
     companion object {
         const val WORK_NAME = "SynchronizeRecipeWorker"
@@ -29,6 +27,7 @@ class SynchronizeRecipeWorker(appContext: Context, workerParameters: WorkerParam
         return try {
             repository.getRandomRecipesFromApi()
             repository.getRandomFoodJokeFromApi()
+
             Result.success()
         }catch (error: Throwable) {
             Result.failure()
