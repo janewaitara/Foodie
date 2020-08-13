@@ -1,7 +1,7 @@
 package com.janewaitara.foodie.networking
 
-//import com.janewaitara.foodie.BuildConfig
 import android.util.Log
+import com.janewaitara.foodie.BuildConfig
 import com.janewaitara.foodie.model.data.Recipe
 import com.janewaitara.foodie.model.data.SearchedRecipe
 import com.janewaitara.foodie.model.response.*
