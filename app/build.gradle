@@ -14,7 +14,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
     defaultConfig {
-        applicationId "com.janewaitara.movieapp"
+        applicationId "com.janewaitara.foodie"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1

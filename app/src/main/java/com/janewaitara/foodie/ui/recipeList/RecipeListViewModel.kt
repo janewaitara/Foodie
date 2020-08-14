@@ -24,7 +24,7 @@ class RecipeListViewModel(
 
     fun getAllRandomRecipes() = repository.getAllRandomRecipes()
 
-    fun getMovies(){
+    fun getRecipes(){
         viewModelScope.launch {
             repository.getRandomRecipesFromApiAndInsetIntoDb()
         }

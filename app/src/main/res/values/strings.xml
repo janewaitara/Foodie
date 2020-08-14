@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Foodie</string>
+    <string name="food_trivia">Food Trivia</string>
+    <string name="food_joke">Food Joke</string>
+    <string name="share">Share Me</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
