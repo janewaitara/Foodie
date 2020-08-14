@@ -2,10 +2,7 @@ package com.janewaitara.foodie
 
 import android.app.Application
 import android.content.Context
-import com.janewaitara.foodie.di.databaseModule
-import com.janewaitara.foodie.di.networkModule
-import com.janewaitara.foodie.di.remoteApiModule
-import com.janewaitara.foodie.di.repositoryModule
+import com.janewaitara.foodie.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -39,7 +36,9 @@ class RecipeApplication : Application() {
                     networkModule,
                     remoteApiModule,
                     databaseModule,
-                    repositoryModule
+                    repositoryModule,
+                    applicationModule,
+                    presentationModule
                 )
             )
         }
