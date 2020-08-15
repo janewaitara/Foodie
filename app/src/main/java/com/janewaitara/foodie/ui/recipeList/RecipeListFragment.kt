@@ -49,9 +49,9 @@ class RecipeListFragment : Fragment(), RecipeListAdapter.RecipeListClickListener
         setUpRecyclerView()
         Log.d("Data Inserted 2","Success")
         getRecipesInitially()
+        getFoodJoke()
         setUpSynchronization()
         setUpData()
-
 
     }
 
@@ -95,6 +95,23 @@ class RecipeListFragment : Fragment(), RecipeListAdapter.RecipeListClickListener
 
             recipes?.let { recipeAdapter.setRecipes(it) }
         })
+    }
+
+    private fun getFoodJoke(){
+        networkStatusChecker.performIfConnectedToInternet {
+            recipeViewModel.getRandomFoodJokeFromApi()
+
+            recipeViewModel.getRandomFoodJoke().observe(viewLifecycleOwner, Observer { randomFoodJokeResponse->
+
+                /**
+                 * Wrapped within let expression since the response can be null*/
+                randomFoodJokeResponse?.let { foodJoke->
+                    Log.d("Food Joke", foodJoke.text)
+                    food_joke.text = foodJoke.text
+                }
+
+            })
+        }
     }
 
 

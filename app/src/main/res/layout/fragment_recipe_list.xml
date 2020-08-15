@@ -7,6 +7,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.recipeList.RecipeListFragment">
 
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/startVerticalGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/endVerticalGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
     <TextView
         android:id="@+id/welcome_recipe_note"
         android:layout_width="match_parent"
@@ -37,34 +53,42 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/food_joke_container1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_margin="@dimen/margin_standard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+       android:layout_marginTop="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/padding_standard"
+        android:padding="@dimen/padding_standard"
         app:cardBackgroundColor="@color/colorAccent"
         app:cardCornerRadius="@dimen/card_corner_radius"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/startVerticalGuideline"
+        app:layout_constraintEnd_toEndOf="@+id/endVerticalGuideline"
         app:layout_constraintBottom_toTopOf="@+id/recyclerViewContainer"
         app:layout_constraintTop_toBottomOf="@+id/recipe_search_view">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/search_view"
             android:orientation="vertical"
             android:layout_gravity="center"
-            android:gravity="center"
             android:padding="@dimen/padding_standard">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/padding_standard"
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:text="Food Joke"/>
 
             <TextView
                 android:id="@id/food_joke"
+                android:textStyle="italic"
+                android:textSize="20sp"
+                android:layout_marginTop="@dimen/padding_standard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 tools:text="Food Joke"/>
 
         </LinearLayout>
