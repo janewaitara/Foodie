@@ -1,5 +1,7 @@
 package com.janewaitara.foodie.ui.recipeList
 
+import android.content.res.Resources
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.janewaitara.foodie.R
+import com.janewaitara.foodie.RecipeApplication
 import com.janewaitara.foodie.model.data.Recipe
 import com.squareup.picasso.Picasso
 
@@ -32,7 +35,13 @@ class RecipeListAdapter(private val clickListener: RecipeListClickListener) : Re
             .into(holder.recipeImage)
 
         holder.recipeName.text = recipeList[position].title
-        holder.recipeServings.text = recipeList[position].servings.toString()
+
+        if (recipeList[position].servings == 1){
+            holder.recipeServings.text = RecipeApplication.getResources().getString(R.string.serving, recipeList[position].servings.toString())
+        }else{
+            holder.recipeServings.text = RecipeApplication.getResources().getString(R.string.servings, recipeList[position].servings.toString())
+        }
+
 
         holder.itemView.setOnClickListener{ view->
             clickListener.recipeItemClicked(view,recipeList[position].id)
@@ -42,6 +51,7 @@ class RecipeListAdapter(private val clickListener: RecipeListClickListener) : Re
 
     internal fun setRecipes(recipes: List<Recipe>)  {
         this.recipeList = recipes
+        Log.d("Data in RecyclerView" , recipeList.toString())
         notifyDataSetChanged()
     }
 

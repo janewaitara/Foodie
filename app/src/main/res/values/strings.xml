@@ -10,4 +10,6 @@
     <string name="content_description_recipe_image">Recipe Image</string>
     <string name="recipe_title">Recipe Title</string>
     <string name="recipe_servings">Recipe Servings</string>
+    <string name="servings">%1$s Servings</string>
+    <string name="serving">%1$s Serving</string>
 </resources>

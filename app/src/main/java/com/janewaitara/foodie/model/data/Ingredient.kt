@@ -5,6 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class Ingredient (
-    val id: Int,
-    val image: String,
+    val id: Int?,
+    val image: String?,
     val originalString: String) : Parcelable

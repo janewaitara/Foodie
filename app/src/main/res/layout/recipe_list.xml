@@ -6,7 +6,7 @@
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_standard"
+    android:layout_margin="@dimen/padding_standard"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -50,6 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="@dimen/margin_standard"
+        android:drawableStart="@drawable/food"
+        android:drawablePadding="3dp"
         android:transitionName="recipeServings"
         android:ellipsize="end"
         android:paddingStart="@dimen/padding_standard"

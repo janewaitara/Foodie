@@ -1,9 +1,11 @@
 package com.janewaitara.foodie.ui.recipeList
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.janewaitara.foodie.model.data.Recipe
 import com.janewaitara.foodie.model.response.FoodJokesResponse
 import com.janewaitara.foodie.model.results.Success
 import com.janewaitara.foodie.repository.RecipeRepository
@@ -22,10 +24,11 @@ class RecipeListViewModel(
      */
 
 
-    fun getAllRandomRecipes() = repository.getAllRandomRecipes()
+    val getAllRandomRecipes :LiveData<List<Recipe>> = repository.getAllRandomRecipes()
 
     fun getRecipes(){
         viewModelScope.launch {
+            Log.d("Data Inserted 4", "Success")
             repository.getRandomRecipesFromApiAndInsetIntoDb()
         }
     }
