@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_standard">16dp</dimen>
+    <dimen name="line_spacing">4dp</dimen>
+    <dimen name="card_corner_radius">20dp</dimen>
+    <dimen name="recipe_layout_height">200dp</dimen>
+    <dimen name="card_elevation" >3dp</dimen>
+</resources>

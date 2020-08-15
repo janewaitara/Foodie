@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/recipeListFragment"
         android:name="com.janewaitara.foodie.ui.recipeList.RecipeListFragment"
-        android:label="fragment_recipe_list"
+        android:label="Recipes"
         tools:layout="@layout/fragment_recipe_list" />
 </navigation>
