@@ -8,4 +8,6 @@
     <string name="welcome_note">Make your own food,\n stay at Home</string>
     <string name="popular_recipes">Popular Recipes</string>
     <string name="content_description_recipe_image">Recipe Image</string>
+    <string name="recipe_title">Recipe Title</string>
+    <string name="recipe_servings">Recipe Servings</string>
 </resources>
