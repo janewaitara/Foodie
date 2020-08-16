@@ -1,6 +1,5 @@
 package com.janewaitara.foodie.ui.recipeList
 
-import android.content.res.Resources
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -58,7 +57,7 @@ class RecipeListAdapter(private val clickListener: RecipeListClickListener) : Re
     class RecipeListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var recipeImage = itemView.findViewById (R.id.recipe_image_card) as ImageView
-        var recipeName = itemView.findViewById (R.id.recipe_name) as TextView
+        var recipeName = itemView.findViewById (R.id.recipe_title) as TextView
         var recipeServings = itemView.findViewById (R.id.recipe_servings) as TextView
 
     }

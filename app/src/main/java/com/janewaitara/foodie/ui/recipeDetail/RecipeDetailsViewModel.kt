@@ -23,7 +23,7 @@ class RecipeDetailsViewModel (
     fun getDetailsViewState() : LiveData<DetailsViewState> = detailsViewState
 
     fun getRecipeById(recipeId: Int){
-        detailsViewState.value = Loading
+        detailsViewState.value = DetailsLoading
 
         viewModelScope.launch {
             val recipe = repository.getRecipeById(recipeId)
@@ -87,5 +87,5 @@ class RecipeDetailsViewModel (
 }
 
 sealed class DetailsViewState
-object Loading: DetailsViewState()
+object DetailsLoading: DetailsViewState()
 data class DetailsSuccess(val recipe: Recipe?): DetailsViewState()

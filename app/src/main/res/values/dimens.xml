@@ -4,7 +4,12 @@
     <dimen name="line_spacing">4dp</dimen>
     <dimen name="card_corner_radius">20dp</dimen>
     <dimen name="recipe_layout_height">200dp</dimen>
+    <dimen name="recipe_detail_image_height">200dp</dimen>
     <dimen name="card_elevation" >3dp</dimen>
     <dimen name="padding_standard">6dp</dimen>
+    <dimen name="padding">10dp</dimen>
+    <dimen name="recipe_detail_padding">10dp</dimen>
     <dimen name="margin_half">8dp</dimen>
+    <dimen name="recipe_title">25sp</dimen>
+    <dimen name="recipe_detail_text_size">18sp</dimen>
 </resources>

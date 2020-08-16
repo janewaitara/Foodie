@@ -12,7 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.janewaitara.foodie.R
 import com.janewaitara.foodie.networking.NetworkStatusChecker
@@ -121,8 +121,13 @@ class RecipeListFragment : Fragment(), RecipeListAdapter.RecipeListClickListener
 
     /**
      * show Details Activity with a shared fragment*/
-    private fun showDetailsFragment(view: View, recipeId: Int) {
-        TODO("Not yet implemented")
+    private fun showDetailsFragment(viewToAnimate: View, recipeId: Int) {
+        view?.let {
+
+            val action = RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailFragment(recipeId)
+            it.findNavController().navigate(action)
+
+        }
     }
 
 }

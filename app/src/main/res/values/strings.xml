@@ -12,4 +12,15 @@
     <string name="recipe_servings">Recipe Servings</string>
     <string name="servings">%1$s Servings</string>
     <string name="serving">%1$s Serving</string>
+    <string name="mins">Mins</string>
+    <string name="health_score">Health \n Score</string>
+    <string name="nutrition">See Nutrition</string>
+    <string name="recipe_ingredients">Ingredients</string>
+    <string name="recipe_directions">Directions</string>
+    <string name="similar_recipes">Similar Recipes</string>
+    <string name="ingredients_title">Ingredients Title</string>
+    <string name="equipments">Equipments</string>
+    <string name="content_description_equipment">Equipment Image</string>
+    <string name="equipments_title">Equipment Title</string>
+    <string name="content_description_ingredients_image">Ingredients Image</string>
 </resources>
