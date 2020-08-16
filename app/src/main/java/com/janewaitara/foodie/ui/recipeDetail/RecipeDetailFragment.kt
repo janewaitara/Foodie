@@ -142,6 +142,10 @@ class RecipeDetailFragment : Fragment(), SimilarRecipeAdapter.SimilarRecipeClick
 
     }
 
+    private fun addToFavorites( view: View){
+
+    }
+
     private fun displayNoInternetMessage() {
         similarRecipesRecyclerView.visibility = View.GONE
 

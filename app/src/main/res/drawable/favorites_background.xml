@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="#FFFFFF"/>
+    <solid android:color="#065BED"
+        />
     <corners android:radius="45dp"/>
-  <!--  <padding android:bottom="@dimen/recipe_detail_padding"
+    <padding android:bottom="@dimen/recipe_detail_padding"
         android:left="@dimen/recipe_detail_padding"
         android:right="@dimen/recipe_detail_padding"
-        android:top="@dimen/recipe_detail_padding"/>-->
+        android:top="@dimen/recipe_detail_padding"/>
 
 </shape>
