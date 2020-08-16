@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/searchRecipeFragment"
         android:name="com.janewaitara.foodie.ui.searchRecipe.SearchRecipeFragment"
-        android:label="fragment_search_recipe"
+        android:label="Search {searchParameter} "
         tools:layout="@layout/fragment_search_recipe" >
         <argument
             android:name="searchParameter"

@@ -29,7 +29,7 @@ class EquipmentAdapter(var equipmentLists: List<Equipment>):RecyclerView.Adapter
         Picasso.get()
             .load("https://spoonacular.com/cdn/equipment_100x100/${equipmentLists[position].image}")
             .fit()
-            .centerCrop()
+
             .into(holder.equipmentImage)
 
         holder.equipmentName.text = equipmentLists[position].name

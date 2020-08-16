@@ -24,7 +24,7 @@ class IngredientsAdapter(var ingredientLists: List<Ingredient>): RecyclerView.Ad
         Picasso.get()
             .load("https://spoonacular.com/cdn/ingredients_100x100/${ingredientLists[position].image}")
             .fit()
-            .centerCrop()
+
             .into(holder.ingredientImage)
 
         holder.ingredientName.text = ingredientLists[position].originalString

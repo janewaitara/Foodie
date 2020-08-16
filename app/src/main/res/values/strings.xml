@@ -23,4 +23,5 @@
     <string name="content_description_equipment">Equipment Image</string>
     <string name="equipments_title">Equipment Title</string>
     <string name="content_description_ingredients_image">Ingredients Image</string>
+    <string name="nav_header_text">We serve passion</string>
 </resources>

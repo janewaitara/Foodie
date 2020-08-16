@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/content_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -32,9 +33,12 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationDrawer"
+        android:background="@color/background_color"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity = "start"
+        app:itemTextAppearance="@style/menu_text_style"
+        android:layout_gravity = "start|center_vertical"
+        app:headerLayout="@layout/nav_header"
         app:menu="@menu/menu_nav_drawer"/>
 
 

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true"
     android:scrollbars = "vertical"
     android:scrollbarStyle="insideInset"
     >
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding_standard"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.recipeDetail.RecipeDetailFragment">
 
     <TextView
@@ -23,7 +23,7 @@
         android:textStyle="bold"
         android:padding="@dimen/padding_standard"
         android:text="@string/recipe_title"
-        android:textSize="@dimen/recipe_title"
+        android:textSize="@dimen/recipe_detail_text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -40,6 +40,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recipe_title"
         />
+
+    <ImageView
+        android:id="@+id/add_to_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/icon_background"
+        android:src="@drawable/ic_favorite"
+        app:layout_constraintBottom_toTopOf="@id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
 
     <RelativeLayout
         android:layout_margin = "@dimen/margin_half"
