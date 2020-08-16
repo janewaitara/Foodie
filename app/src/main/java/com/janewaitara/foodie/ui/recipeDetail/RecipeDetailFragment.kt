@@ -97,7 +97,7 @@ class RecipeDetailFragment : Fragment(), SimilarRecipeAdapter.SimilarRecipeClick
         hideEmptyState()
         recipe_title.text = recipe.title
         servings.text = recipe.servings.toString()
-        Picasso.get().load(recipe.image).into(recipe_image_card)
+        Picasso.get().load(recipe.image).fit().into(recipe_image_card)
         ready_in_minutes.text = recipe.readyInMinutes.toString()
         health_score_value.text = recipe.healthScore.toString()
 

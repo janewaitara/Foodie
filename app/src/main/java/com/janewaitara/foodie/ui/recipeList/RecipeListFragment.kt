@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -52,6 +53,37 @@ class RecipeListFragment : Fragment(), RecipeListAdapter.RecipeListClickListener
         getFoodJoke()
         setUpSynchronization()
         setUpData()
+        setUpSearchView()
+
+    }
+
+    private fun setUpSearchView() {
+
+        recipe_search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    if (it.isNotBlank())
+
+                        showSearchFragment(it)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+               return false
+            }
+
+
+        })
+
+    }
+
+    private fun showSearchFragment(searchParameter: String) {
+        view?.let {
+            val action = RecipeListFragmentDirections.actionRecipeListFragmentToSearchRecipeFragment(searchParameter)
+
+            it.findNavController().navigate(action)
+        }
 
     }
 
