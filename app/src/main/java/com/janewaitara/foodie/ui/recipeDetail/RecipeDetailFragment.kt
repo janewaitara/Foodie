@@ -1,5 +1,6 @@
 package com.janewaitara.foodie.ui.recipeDetail
 
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,13 +12,20 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.janewaitara.foodie.model.data.Equipment
 import com.janewaitara.foodie.model.data.Recipe
+import com.janewaitara.foodie.model.response.SimilarRecipeResponse
+import com.janewaitara.foodie.networking.NetworkStatusChecker
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_recipe_detail.*
+import kotlinx.android.synthetic.main.fragment_recipe_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RecipeDetailFragment : Fragment() {
+class RecipeDetailFragment : Fragment(), SimilarRecipeAdapter.SimilarRecipeClickListener {
 
     private val recipeDetailViewModel: RecipeDetailsViewModel by viewModel()
+
+    private val networkStatusChecker by lazy {
+        NetworkStatusChecker(activity?.getSystemService(ConnectivityManager::class.java))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +44,7 @@ class RecipeDetailFragment : Fragment() {
 
             recipeDetailViewModel.getRecipeById(recipeIdArgs.recipeId)
             setUpData()
+            setUpSimilarRecipe(recipeIdArgs.recipeId)
 
         }
     }
@@ -107,6 +116,37 @@ class RecipeDetailFragment : Fragment() {
 
     }
 
+    private fun setUpSimilarRecipe(recipeId: Int){
+
+        networkStatusChecker.performSearchIfConnectedToInternet(::displayNoInternetMessage) {
+            recipeDetailViewModel.getSimilarRecipe(recipeId)
+
+            recipeDetailViewModel.getSimilarRecipesLiveData().observe(viewLifecycleOwner, Observer{ similarRecipeResponse->
+
+                similarRecipeResponse?.let { similarRecipeList ->
+
+                    setUpSimilarRecipeRecyclerView(similarRecipeList)
+                }
+            })
+        }
+    }
+
+    private fun setUpSimilarRecipeRecyclerView(similarRecipeList: List<SimilarRecipeResponse>) {
+
+        similarRecipesRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+
+        val adapter = SimilarRecipeAdapter(this)
+        similarRecipesRecyclerView.adapter = adapter
+
+        adapter.setSimilarRecipes(similarRecipeList)
+
+    }
+
+    private fun displayNoInternetMessage() {
+        similarRecipesRecyclerView.visibility = View.GONE
+
+    }
+
     private fun showLoading() {
         TODO("Not yet implemented")
     }
@@ -121,5 +161,9 @@ class RecipeDetailFragment : Fragment() {
 
     private fun hideEmptyState() {
         // Hide empty state here
+    }
+
+    override fun similarRecipeItemClicked(similarRecipeId: Int) {
+
     }
 }

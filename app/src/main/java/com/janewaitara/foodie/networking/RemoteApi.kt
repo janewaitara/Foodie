@@ -59,10 +59,10 @@ class RemoteApi(private val remoteApiService: RemoteApiService) {
 
     /**
      *get similar recipes*/
-    suspend fun getSimilarRecipe(recipeId: Int): Result<SimilarRecipeResponse> = try {
+    suspend fun getSimilarRecipe(recipeId: Int): Result<List<SimilarRecipeResponse>> = try {
         val data = remoteApiService.getSimilarRecipe(recipeId, apiKey)
 
-        Success(data.random())
+        Success(data)
     }catch (error: Throwable){
         Failure(error)
     }

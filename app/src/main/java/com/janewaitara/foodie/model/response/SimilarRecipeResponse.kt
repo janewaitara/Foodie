@@ -6,6 +6,7 @@ import com.squareup.moshi.JsonClass
 class SimilarRecipeResponse(
     val id: Int,
     val title: String,
+    val imageType: String,
     val readyInMinutes: Int,
     val servings: Int
 )

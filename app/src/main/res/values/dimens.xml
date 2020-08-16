@@ -12,4 +12,5 @@
     <dimen name="margin_half">8dp</dimen>
     <dimen name="recipe_title">25sp</dimen>
     <dimen name="recipe_detail_text_size">18sp</dimen>
+    <dimen name="drawable_padding">3dp</dimen>
 </resources>

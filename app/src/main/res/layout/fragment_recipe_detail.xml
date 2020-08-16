@@ -41,162 +41,123 @@
         app:layout_constraintTop_toBottomOf="@+id/recipe_title"
         />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/topHorizontalGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.125"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/topMiddleHorizontalGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/middleHorizontalGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.375"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottomHorizontalGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/startVerticalGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/endVerticalGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
-
-    <ImageView
-        android:id="@+id/recipe_image_card"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="@dimen/padding_standard"
-        android:layout_gravity="center"
-        android:contentDescription="@string/content_description_recipe_image"
-        android:transitionName="recipeImage"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/food_image"
+    <RelativeLayout
+        android:layout_margin = "@dimen/margin_half"
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/startVerticalGuideline"
-        app:layout_constraintTop_toTopOf="@+id/topHorizontalGuideline"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomHorizontalGuideline"/>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:paddingTop="@dimen/padding_standard"
-        android:layout_margin="@dimen/padding_standard"
-        android:background="@drawable/recipe_details"
-        app:layout_constraintStart_toStartOf="@+id/startVerticalGuideline"
-        app:layout_constraintEnd_toEndOf="@+id/endVerticalGuideline"
-        app:layout_constraintTop_toTopOf="@+id/topMiddleHorizontalGuideline"
-        app:layout_constraintBottom_toBottomOf="@+id/middleHorizontalGuideline">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/servings">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/recipe_image_card"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="@drawable/icon_background"
-            android:src="@drawable/ic_readiness_time"/>
-        <TextView
-            android:id="@+id/ready_in_minutes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="2dp"
-            android:text="14"
-            android:textSize="@dimen/recipe_detail_text_size"
-            android:layout_gravity="center"
-            />
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mins"
-            android:textSize="@dimen/recipe_detail_text_size"
-            android:layout_gravity="center"
-            />
-    </LinearLayout>
+            android:contentDescription="@string/content_description_recipe_image"
+            android:transitionName="recipeImage"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/food_image" />
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:paddingTop="@dimen/padding_standard"
-        android:layout_margin="@dimen/padding_standard"
-        android:background="@drawable/recipe_details"
-        app:layout_constraintStart_toStartOf="@+id/endVerticalGuideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/topMiddleHorizontalGuideline"
-        app:layout_constraintBottom_toBottomOf="@+id/middleHorizontalGuideline">
+        <LinearLayout
+            android:id="@+id/time_container"
+            android:layout_width="80dp"
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/padding_standard"
+            android:layout_margin="@dimen/padding_standard"
+            android:layout_toEndOf="@+id/recipe_image_card"
+            android:background="@drawable/recipe_details">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/icon_background"
-            android:src="@drawable/ic_readiness_time"/>
-        <TextView
-            android:id="@+id/health_score_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="2dp"
-            android:text="14"
-            android:textSize="@dimen/recipe_detail_text_size"
-            android:layout_gravity="center"
-            />
-        <TextView
-            android:id="@+id/health_score"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/health_score"
-            android:textSize="@dimen/recipe_detail_text_size"
-            />
-    </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/icon_background"
+                android:src="@drawable/ic_readiness_time"/>
+            <TextView
+                android:id="@+id/ready_in_minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:text="14"
+                android:textSize="@dimen/recipe_detail_text_size"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mins"
+                android:textSize="@dimen/recipe_detail_text_size"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/nutrition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/nutrition"
-        android:textSize="25sp"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomHorizontalGuideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="@+id/startVerticalGuideline"
-        app:layout_constraintTop_toTopOf="@+id/middleHorizontalGuideline"/>
+        <LinearLayout
+            android:id="@+id/health_score_container"
+            android:layout_width="80dp"
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            android:layout_toEndOf="@+id/time_container"
+            android:paddingTop="@dimen/padding_standard"
+            android:layout_margin="@dimen/padding_standard"
+            android:background="@drawable/recipe_details">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/icon_background"
+                android:src="@drawable/ic_readiness_time"/>
+            <TextView
+                android:id="@+id/health_score_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:text="14"
+                android:textSize="@dimen/recipe_detail_text_size"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:id="@+id/health_score"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/health_score"
+                android:textSize="@dimen/recipe_detail_text_size"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/nutrition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/nutrition"
+            android:layout_below="@+id/time_container"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/padding"
+            android:layout_marginEnd="@dimen/padding_standard"
+
+            android:textSize="25sp"
+            android:textColor="@color/colorPrimary" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/ingredients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:layout_marginTop="@dimen/margin_half"
         android:padding="@dimen/padding_standard"
         android:text="@string/recipe_ingredients"
         android:textSize="@dimen/recipe_detail_text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottomHorizontalGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
         />
 
     <androidx.recyclerview.widget.RecyclerView

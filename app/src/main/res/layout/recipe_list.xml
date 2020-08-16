@@ -51,7 +51,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="@dimen/margin_standard"
         android:drawableStart="@drawable/food"
-        android:drawablePadding="3dp"
+        android:drawablePadding="@dimen/drawable_padding"
         android:transitionName="recipeServings"
         android:ellipsize="end"
         android:paddingStart="@dimen/padding_standard"
