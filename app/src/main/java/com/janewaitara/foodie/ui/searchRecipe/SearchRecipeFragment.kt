@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.janewaitara.foodie.R
@@ -79,7 +80,16 @@ class SearchRecipeFragment : Fragment(), SearchRecipeAdapter.SearchRecipeListCli
     }
 
     override fun searchRecipeItemClicked(searchedRecipe: SearchedRecipe) {
-        TODO("Not yet implemented")
+       showDetailsFragments(searchedRecipe)
+    }
+
+    private fun showDetailsFragments(searchedRecipe: SearchedRecipe) {
+
+        view?.let {
+            val action = SearchRecipeFragmentDirections.actionSearchRecipeFragmentToSearchRecipeDetailFragment(searchedRecipe.id)
+
+            it.findNavController().navigate(action)
+        }
     }
 
 }

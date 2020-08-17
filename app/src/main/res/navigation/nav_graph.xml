@@ -37,12 +37,23 @@
         <argument
             android:name="searchParameter"
             app:argType="string" />
+        <action
+            android:id="@+id/action_searchRecipeFragment_to_searchRecipeDetailFragment"
+            app:destination="@id/searchRecipeDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/recipeNutritionWidget"
         android:name="com.janewaitara.foodie.ui.recipeNutrition.RecipeNutritionWidget"
         android:label="fragment_recipe_nutrition_widget"
         tools:layout="@layout/fragment_recipe_nutrition_widget" >
+        <argument
+            android:name="recipeId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchRecipeDetailFragment"
+        android:name="com.janewaitara.foodie.ui.recipeDetail.searchRecipeDetails.SearchRecipeDetailFragment"
+        android:label="SearchRecipeDetailFragment" >
         <argument
             android:name="recipeId"
             app:argType="integer" />

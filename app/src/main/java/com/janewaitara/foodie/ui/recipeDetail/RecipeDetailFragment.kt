@@ -58,7 +58,7 @@ class RecipeDetailFragment : Fragment(), SimilarRecipeAdapter.SimilarRecipeClick
     }
 
     private fun showToast(){
-        Toast.makeText(activity, "Connect to the Internet", Toast.LENGTH_LONG)
+        Toast.makeText(activity, "Connect to the Internet", Toast.LENGTH_LONG).show()
     }
 
     private fun showNutritionFragment(recipeId: Int) {
