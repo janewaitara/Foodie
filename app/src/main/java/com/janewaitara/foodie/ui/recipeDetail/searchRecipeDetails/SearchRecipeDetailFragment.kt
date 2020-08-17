@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.janewaitara.foodie.R
 import com.janewaitara.foodie.model.data.Equipment
@@ -154,8 +155,15 @@ class SearchRecipeDetailFragment : Fragment() , SimilarRecipeAdapter.SimilarReci
     }
 
     override fun similarRecipeItemClicked(similarRecipeId: Int) {
-
+         showRecipeDetails(similarRecipeId)
     }
 
+    private fun showRecipeDetails(similarRecipeId: Int) {
+        view?.let {
+            val action = SearchRecipeDetailFragmentDirections.actionSearchRecipeDetailFragmentSelf(similarRecipeId)
+
+            it.findNavController().navigate(action)
+        }
+    }
 
 }

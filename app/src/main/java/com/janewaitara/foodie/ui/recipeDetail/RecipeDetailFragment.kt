@@ -16,6 +16,7 @@ import com.janewaitara.foodie.model.data.Equipment
 import com.janewaitara.foodie.model.data.Recipe
 import com.janewaitara.foodie.model.response.SimilarRecipeResponse
 import com.janewaitara.foodie.networking.NetworkStatusChecker
+import com.janewaitara.foodie.ui.recipeDetail.searchRecipeDetails.SearchRecipeDetailFragmentDirections
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_recipe_detail.*
 import kotlinx.android.synthetic.main.fragment_recipe_list.*
@@ -188,6 +189,14 @@ class RecipeDetailFragment : Fragment(), SimilarRecipeAdapter.SimilarRecipeClick
     }
 
     override fun similarRecipeItemClicked(similarRecipeId: Int) {
+        showRecipeDetails(similarRecipeId)
+    }
 
+    private fun showRecipeDetails(similarRecipeId: Int) {
+        view?.let {
+            val action = RecipeDetailFragmentDirections.actionRecipeDetailFragmentToSearchRecipeDetailFragment(similarRecipeId)
+
+            it.findNavController().navigate(action)
+        }
     }
 }

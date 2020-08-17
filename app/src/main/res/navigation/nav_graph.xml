@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_recipeDetailFragment_to_recipeNutritionWidget"
             app:destination="@id/recipeNutritionWidget" />
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_searchRecipeDetailFragment"
+            app:destination="@id/searchRecipeDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchRecipeFragment"
@@ -57,5 +60,8 @@
         <argument
             android:name="recipeId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_searchRecipeDetailFragment_self"
+            app:destination="@id/searchRecipeDetailFragment" />
     </fragment>
 </navigation>
