@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.janewaitara.foodie.model.response.RecipeInformationResponse
 import com.janewaitara.foodie.model.response.SimilarRecipeResponse
+import com.janewaitara.foodie.model.results.Result
 import com.janewaitara.foodie.model.results.Success
 import com.janewaitara.foodie.networking.RemoteApi
 import kotlinx.coroutines.launch
@@ -16,9 +17,9 @@ class SearchRecipeDetailsViewModel (private val remoteApi: RemoteApi): ViewModel
      *
      * Help to communicate back when the save of a creature is complete
      * Save liveData property to handle communication*/
-    private val recipeDetailsLiveData = MutableLiveData<RecipeInformationResponse>()
+    private val recipeDetailsLiveData = MutableLiveData<Result<RecipeInformationResponse>>()
 
-    fun getRecipeDetailsLiveData(): LiveData<RecipeInformationResponse> = recipeDetailsLiveData
+    fun getRecipeDetailsLiveData(): LiveData<Result<RecipeInformationResponse>> = recipeDetailsLiveData
 
     fun getRecipeDetailsFromApiUsingRecipeId(recipeId: Int){
         viewModelScope.launch {
@@ -27,9 +28,8 @@ class SearchRecipeDetailsViewModel (private val remoteApi: RemoteApi): ViewModel
 
             //Log.d("Recipe Information", searchedRecipesInfo.toString())
 
-            if (searchedRecipesInfo is Success) {
-                recipeDetailsLiveData.postValue(searchedRecipesInfo.data)
-            }
+                recipeDetailsLiveData.postValue(searchedRecipesInfo)
+
         }
     }
 

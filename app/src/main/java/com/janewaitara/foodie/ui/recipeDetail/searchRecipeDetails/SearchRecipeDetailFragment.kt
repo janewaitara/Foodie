@@ -3,6 +3,7 @@ package com.janewaitara.foodie.ui.recipeDetail.searchRecipeDetails
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,14 +13,30 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.janewaitara.foodie.R
 import com.janewaitara.foodie.model.data.Equipment
+import com.janewaitara.foodie.model.data.SearchedRecipe
 import com.janewaitara.foodie.model.response.RecipeInformationResponse
 import com.janewaitara.foodie.model.response.SimilarRecipeResponse
+import com.janewaitara.foodie.model.results.Loading
+import com.janewaitara.foodie.model.results.Result
+import com.janewaitara.foodie.model.results.Success
 import com.janewaitara.foodie.networking.NetworkStatusChecker
 import com.janewaitara.foodie.ui.recipeDetail.EquipmentAdapter
 import com.janewaitara.foodie.ui.recipeDetail.IngredientsAdapter
 import com.janewaitara.foodie.ui.recipeDetail.SimilarRecipeAdapter
+import com.janewaitara.foodie.utils.isVisible
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_search_recipe.*
 import kotlinx.android.synthetic.main.fragment_search_recipe_detail.*
+import kotlinx.android.synthetic.main.fragment_search_recipe_detail.equipmentsRecyclerView
+import kotlinx.android.synthetic.main.fragment_search_recipe_detail.health_score_value
+import kotlinx.android.synthetic.main.fragment_search_recipe_detail.ingredientRecyclerView
+import kotlinx.android.synthetic.main.fragment_search_recipe_detail.ready_in_minutes
+import kotlinx.android.synthetic.main.fragment_search_recipe_detail.recipe_directions
+import kotlinx.android.synthetic.main.fragment_search_recipe_detail.recipe_image_card
+import kotlinx.android.synthetic.main.fragment_search_recipe_detail.recipe_loading_anim
+import kotlinx.android.synthetic.main.fragment_search_recipe_detail.recipe_title
+import kotlinx.android.synthetic.main.fragment_search_recipe_detail.servings
+import kotlinx.android.synthetic.main.fragment_search_recipe_detail.similarRecipesRecyclerView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchRecipeDetailFragment : Fragment() , SimilarRecipeAdapter.SimilarRecipeClickListener{
@@ -89,13 +106,32 @@ class SearchRecipeDetailFragment : Fragment() , SimilarRecipeAdapter.SimilarReci
             searchRecipeDetailsViewModel.getRecipeDetailsLiveData().observe(viewLifecycleOwner, Observer{ recipeInformationResponse ->
 
                 recipeInformationResponse?.let { recipeInformationResponse ->
-                    displayRecipeDetails(recipeInformationResponse)
+                    handleState(recipeInformationResponse)
+
                 }
             })
         }
     }
 
+    private fun handleState(recipeInformationResponse: Result<RecipeInformationResponse>) {
+
+            when(recipeInformationResponse){
+                is Loading -> showLoading(true)
+                is Success -> displayRecipeDetails(recipeInformationResponse.data)
+            }
+
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        recipe_loading_anim.isVisible(isLoading)
+        details_container.isVisible(!isLoading)
+    }
+
+
     private fun displayRecipeDetails(recipeInformationResponse: RecipeInformationResponse) {
+
+        showLoading(false)
+
         recipe_title.text = recipeInformationResponse.title
 
         if (recipeInformationResponse.servings == 1) {
@@ -116,17 +152,26 @@ class SearchRecipeDetailFragment : Fragment() , SimilarRecipeAdapter.SimilarReci
 
         setUpRecyclerViews(recipeInformationResponse)
 
+        if (!recipeInformationResponse.analyzedInstructions.isNullOrEmpty()) {
 
-        val directions = recipeInformationResponse.analyzedInstructions
+            val directions = recipeInformationResponse.analyzedInstructions
 
-        val directionsBuilder = StringBuilder()
-        directions?.forEach { steps ->
-            steps.steps.forEach{step ->
-                directionsBuilder.append(step.number).append(". ").append(step.step).append("\n")
+            val directionsBuilder = StringBuilder()
+            directions?.forEach { steps ->
+                steps.steps.forEach { step ->
+                    directionsBuilder.append(step.number).append(". ").append(step.step)
+                        .append("\n")
+                }
+
             }
+            recipe_directions.text = directionsBuilder
+
+        } else {
+
+                recipe_directions.text = getString(R.string.directions_unavailable)
+                recipe_directions.gravity = Gravity.CENTER
 
         }
-        recipe_directions.text = directionsBuilder
     }
 
     private fun setUpRecyclerViews(recipeInformationResponse: RecipeInformationResponse) {
@@ -134,24 +179,30 @@ class SearchRecipeDetailFragment : Fragment() , SimilarRecipeAdapter.SimilarReci
         ingredientRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         ingredientRecyclerView.adapter = IngredientsAdapter(recipeInformationResponse.extendedIngredients)
 
-        Log.d("1 Equipments", "Setting up Equipment RecyclerView")
-        equipmentsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        if (!recipeInformationResponse.extendedIngredients.isNullOrEmpty()) {
+            equipmentsRecyclerView.layoutManager =
+                LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
-        Log.d("2 Equipments 1", "Setting up Equipment RecyclerView")
-        var equipmentList = mutableListOf<Equipment>()
-        recipeInformationResponse.analyzedInstructions.forEach{steps ->
-            Log.d("3 Equipments 2", "Setting up Equipment RecyclerView")
-            steps.steps.forEach{step->
+            var equipmentList = mutableListOf<Equipment>()
+            recipeInformationResponse.analyzedInstructions.forEach { steps ->
+                steps.steps.forEach { step ->
 
-                step.equipment.forEach {
-                    equipmentList.add( it )
+                    step.equipment.forEach {
+                        equipmentList.add(it)
+                    }
                 }
             }
+
+            equipmentsRecyclerView.adapter =
+                EquipmentAdapter(equipmentLists = equipmentList.toSet().toList())
+        }else {
+            hideEquipments()
         }
-        Log.d("4 Equipments", equipmentList.toString())
+    }
 
-        equipmentsRecyclerView.adapter = EquipmentAdapter(equipmentLists = equipmentList.toSet().toList())
-
+    private fun hideEquipments() {
+        equipments.isVisible(false)
+        equipmentsRecyclerView.isVisible(false)
     }
 
     override fun similarRecipeItemClicked(similarRecipeId: Int) {
