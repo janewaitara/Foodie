@@ -12,7 +12,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding_standard"
-    android:background="@color/opaque_accent"
+
     tools:context=".ui.recipeDetail.RecipeDetailFragment">
 
     <TextView
@@ -47,7 +47,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/favorites_background"
         android:src="@drawable/ic_favorite"
         android:onClick="addToFavorites"
         android:layout_marginEnd="@dimen/margin_standard"
@@ -281,6 +280,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/similar_recipes"/>
+
+    <TextView
+        android:id="@+id/similar_recipes_unavailable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="italic"
+        android:padding="@dimen/padding_standard"
+        android:text="@string/no_internet"
+        android:textSize="@dimen/recipe_detail_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/similar_recipes"
+        />
+
+    <ImageView
+        android:id="@+id/recipe_loading_anim"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/loading_animation"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

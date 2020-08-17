@@ -14,7 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.janewaitara.foodie.R
 import com.janewaitara.foodie.model.data.SearchedRecipe
+import com.janewaitara.foodie.model.results.Failure
+import com.janewaitara.foodie.model.results.Loading
+import com.janewaitara.foodie.model.results.Result
+import com.janewaitara.foodie.model.results.Success
 import com.janewaitara.foodie.networking.NetworkStatusChecker
+import com.janewaitara.foodie.utils.isVisible
 import kotlinx.android.synthetic.main.fragment_search_recipe.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -49,15 +54,17 @@ class SearchRecipeFragment : Fragment(), SearchRecipeAdapter.SearchRecipeListCli
     private fun performRecipeSearch(searchParameter: String) {
 
         networkStatusChecker.performSearchIfConnectedToInternet(::displayNoInternetMessage){
+            showNoInternet(false)
 
             lifecycleScope.launch {
 
                 searchRecipeViewModel.searchRecipeFromApiUsingSearchParameter(searchParameter)
 
                 Log.d("Search Parameter", searchParameter)
+
                 searchRecipeViewModel.getSearchedRecipeLiveData().observe(viewLifecycleOwner, Observer{ searchedRecipes ->
                 searchedRecipes?.let {searchedRecipeList ->
-                    setUpRecyclerView(searchedRecipeList)
+                    handleState(searchedRecipeList)
                     Log.d("Searched Recipes", searchedRecipeList.toString())
                     }
                 })
@@ -67,7 +74,20 @@ class SearchRecipeFragment : Fragment(), SearchRecipeAdapter.SearchRecipeListCli
 
     }
 
+    private fun handleState(searchedRecipeList: Result<List<SearchedRecipe>>) {
+       when(searchedRecipeList){
+           is Loading -> showLoading(true)
+           is Success -> setUpRecyclerView(searchedRecipeList.data)
+       }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        recipe_loading_anim.isVisible(isLoading)
+
+    }
+
     private fun setUpRecyclerView(searchedRecipeList: List<SearchedRecipe>) {
+        showLoading(false)
 
         searchRecipeRecyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         val adapter = SearchRecipeAdapter(this)
@@ -76,7 +96,11 @@ class SearchRecipeFragment : Fragment(), SearchRecipeAdapter.SearchRecipeListCli
     }
 
     private fun displayNoInternetMessage() {
+        showNoInternet(true)
+    }
 
+    private fun showNoInternet(boolean: Boolean) {
+        no_internet.isVisible(boolean)
     }
 
     override fun searchRecipeItemClicked(searchedRecipe: SearchedRecipe) {

@@ -32,4 +32,6 @@
     <string name="nutrient_percent">Nutrient Percent Of Daily Needs</string>
     <string name="bad">Bad</string>
     <string name="good">Good</string>
+    <string name="no_internet">No internet</string>
+    <string name="directions_unavailable">Instructions are unavailable</string>
 </resources>

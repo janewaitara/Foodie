@@ -3,6 +3,7 @@ package com.janewaitara.foodie.ui.recipeDetail
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,10 +17,9 @@ import com.janewaitara.foodie.model.data.Equipment
 import com.janewaitara.foodie.model.data.Recipe
 import com.janewaitara.foodie.model.response.SimilarRecipeResponse
 import com.janewaitara.foodie.networking.NetworkStatusChecker
-import com.janewaitara.foodie.ui.recipeDetail.searchRecipeDetails.SearchRecipeDetailFragmentDirections
+import com.janewaitara.foodie.utils.isVisible
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_recipe_detail.*
-import kotlinx.android.synthetic.main.fragment_recipe_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RecipeDetailFragment : Fragment(), SimilarRecipeAdapter.SimilarRecipeClickListener {
@@ -71,27 +71,42 @@ class RecipeDetailFragment : Fragment(), SimilarRecipeAdapter.SimilarRecipeClick
     }
 
     private fun setUpRecyclerViews(recipe: Recipe) {
-        ingredientRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
-        ingredientRecyclerView.adapter = IngredientsAdapter(recipe.extendedIngredients)
 
-        Log.d("Equipments", "Setting up Equipment RecyclerView")
-        equipmentsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
-        Log.d("Equipments 1", "Setting up Equipment RecyclerView")
-        var equipmentList = mutableListOf<Equipment>()
-        recipe.analyzedInstructions.forEach{steps ->
-            Log.d("Equipments 2", "Setting up Equipment RecyclerView")
-            steps.steps.forEach{step->
+            ingredientRecyclerView.layoutManager =
+                LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            ingredientRecyclerView.adapter = IngredientsAdapter(recipe.extendedIngredients)
 
-                step.equipment.forEach {
-                    equipmentList.add( it )
+
+        if (!recipe.extendedIngredients.isNullOrEmpty()) {
+            Log.d("Equipments", "Setting up Equipment RecyclerView")
+            equipmentsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+
+            Log.d("Equipments 1", "Setting up Equipment RecyclerView")
+            var equipmentList = mutableListOf<Equipment>()
+            recipe.analyzedInstructions.forEach { steps ->
+                Log.d("Equipments 2", "Setting up Equipment RecyclerView")
+                steps.steps.forEach { step ->
+
+                    step.equipment.forEach {
+                        equipmentList.add(it)
+                    }
                 }
             }
+            Log.d("Equipments", equipmentList.toString())
+
+            equipmentsRecyclerView.adapter =
+                EquipmentAdapter(equipmentLists = equipmentList.toSet().toList())
+        }else{
+            hideEquipments()
+
         }
-        Log.d("Equipments", equipmentList.toString())
 
-        equipmentsRecyclerView.adapter = EquipmentAdapter(equipmentLists = equipmentList.toSet().toList())
+    }
 
+    private fun hideEquipments() {
+        equipments.isVisible(false)
+        equipmentsRecyclerView.isVisible(false)
     }
 
     private fun setUpData() {
@@ -104,7 +119,7 @@ class RecipeDetailFragment : Fragment(), SimilarRecipeAdapter.SimilarRecipeClick
 
     private fun onDetailsViewStateChanged(detailViewState: DetailsViewState) {
         when(detailViewState){
-            //DetailsLoading -> showLoading()
+            DetailsLoading -> showLoading(true)
             is DetailsSuccess -> {
                 if (detailViewState.recipe != null)
                     displayRecipeDetails(detailViewState.recipe)
@@ -114,32 +129,52 @@ class RecipeDetailFragment : Fragment(), SimilarRecipeAdapter.SimilarRecipeClick
     }
 
     private fun displayRecipeDetails(recipe: Recipe) {
-        hideLoading()
+       showLoading(false)
         hideEmptyState()
         recipe_title.text = recipe.title
-        servings.text = recipe.servings.toString()
+
+        if (recipe.servings == 1){
+            servings.text = resources.getString(R.string.serving, recipe.servings.toString())
+        }else{
+            servings.text = resources.getString(R.string.serving, recipe.servings.toString())
+        }
+
+
         Picasso.get().load(recipe.image).fit().into(recipe_image_card)
         ready_in_minutes.text = recipe.readyInMinutes.toString()
         health_score_value.text = recipe.healthScore.toString()
 
         setUpRecyclerViews(recipe)
 
-        val directions = recipe.analyzedInstructions
+        if (!recipe.analyzedInstructions.isNullOrEmpty()){
 
-        val directionsBuilder = StringBuilder()
-        directions?.forEach { steps ->
-            steps.steps.forEach{step ->
-                directionsBuilder.append(step.number).append(". ").append(step.step).append("\n")
+            val directions = recipe.analyzedInstructions
+
+            val directionsBuilder = StringBuilder()
+            directions.forEach { steps ->
+                steps.steps.forEach { step ->
+                    directionsBuilder.append(step.number).append(". ").append(step.step)
+                        .append("\n")
+                }
+
             }
+            recipe_directions.text = directionsBuilder
+        }else {
+
+            recipe_directions.text = getString(R.string.directions_unavailable)
+            recipe_directions.gravity = Gravity.CENTER
 
         }
-        recipe_directions.text = directionsBuilder
+
 
     }
 
     private fun setUpSimilarRecipe(recipeId: Int){
 
         networkStatusChecker.performSearchIfConnectedToInternet(::displayNoInternetMessage) {
+
+            hideNoInternetMessage()
+
             recipeDetailViewModel.getSimilarRecipe(recipeId)
 
             recipeDetailViewModel.getSimilarRecipesLiveData().observe(viewLifecycleOwner, Observer{ similarRecipeResponse->
@@ -168,16 +203,16 @@ class RecipeDetailFragment : Fragment(), SimilarRecipeAdapter.SimilarRecipeClick
     }
 
     private fun displayNoInternetMessage() {
-        similarRecipesRecyclerView.visibility = View.GONE
-
+        similar_recipes_unavailable.isVisible(true)
     }
 
-    private fun showLoading() {
-        TODO("Not yet implemented")
+    private fun hideNoInternetMessage(){
+        similar_recipes_unavailable.isVisible(false)
     }
 
-    private fun hideLoading() {
-        // Hide progress here
+    private fun showLoading( status: Boolean) {
+        recipe_loading_anim.isVisible(status)
+
     }
 
     private fun showEmptyState() {
