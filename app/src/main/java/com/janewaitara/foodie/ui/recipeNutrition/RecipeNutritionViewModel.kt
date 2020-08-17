@@ -1,5 +1,6 @@
-package com.janewaitara.foodie.ui.recipeNutitrition
+package com.janewaitara.foodie.ui.recipeNutrition
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,6 +24,9 @@ class RecipeNutritionViewModel(private val remoteApi: RemoteApi) : ViewModel(){
 
             if (recipeNutrition is Success){
                 recipeNutritionLiveData.postValue(recipeNutrition.data)
+                Log.d("Added to LiveData", recipeNutrition.data.toString())
+            }else{
+                Log.d("Added to LiveData", recipeNutrition.toString())
             }
         }
     }

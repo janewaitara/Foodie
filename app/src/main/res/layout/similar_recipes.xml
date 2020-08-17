@@ -11,7 +11,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:contentDescription="@string/content_description_equipment"
+        android:contentDescription="@string/content_description_similar_recipe"
         android:scaleType="center"
         app:srcCompat="@drawable/food_image" />
 
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_standard"
-        android:text="@string/equipments_title"
+        android:text="@string/similar_recipe_title"
         android:textStyle="bold" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_standard"
-        android:text="@string/equipments_title"
+        android:text="@string/similar_recipes_servings"
         android:textStyle="bold" />
 
 </LinearLayout>

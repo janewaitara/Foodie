@@ -25,6 +25,9 @@
         <argument
             android:name="recipeId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_recipeNutritionWidget"
+            app:destination="@id/recipeNutritionWidget" />
     </fragment>
     <fragment
         android:id="@+id/searchRecipeFragment"
@@ -34,5 +37,14 @@
         <argument
             android:name="searchParameter"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeNutritionWidget"
+        android:name="com.janewaitara.foodie.ui.recipeNutrition.RecipeNutritionWidget"
+        android:label="fragment_recipe_nutrition_widget"
+        tools:layout="@layout/fragment_recipe_nutrition_widget" >
+        <argument
+            android:name="recipeId"
+            app:argType="integer" />
     </fragment>
 </navigation>

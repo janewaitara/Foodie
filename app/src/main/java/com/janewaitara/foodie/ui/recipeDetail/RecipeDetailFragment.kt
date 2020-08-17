@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.janewaitara.foodie.R
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.janewaitara.foodie.model.data.Equipment
 import com.janewaitara.foodie.model.data.Recipe
@@ -46,6 +48,24 @@ class RecipeDetailFragment : Fragment(), SimilarRecipeAdapter.SimilarRecipeClick
             setUpData()
             setUpSimilarRecipe(recipeIdArgs.recipeId)
 
+            nutrition.setOnClickListener {
+                networkStatusChecker.performSearchIfConnectedToInternet(::showToast) {
+                    showNutritionFragment(recipeIdArgs.recipeId)
+                }
+            }
+
+        }
+    }
+
+    private fun showToast(){
+        Toast.makeText(activity, "Connect to the Internet", Toast.LENGTH_LONG)
+    }
+
+    private fun showNutritionFragment(recipeId: Int) {
+        view?.let {
+            val action = RecipeDetailFragmentDirections.actionRecipeDetailFragmentToRecipeNutritionWidget(recipeId)
+
+            it.findNavController().navigate(action)
         }
     }
 

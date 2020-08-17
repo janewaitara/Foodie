@@ -21,7 +21,15 @@
     <string name="ingredients_title">Ingredients Title</string>
     <string name="equipments">Equipments</string>
     <string name="content_description_equipment">Equipment Image</string>
+    <string name="content_description_similar_recipe">Similar Recipe Image</string>
     <string name="equipments_title">Equipment Title</string>
+    <string name="similar_recipe_title">Similar Title</string>
     <string name="content_description_ingredients_image">Ingredients Image</string>
     <string name="nav_header_text">We serve passion</string>
+    <string name="similar_recipes_servings">Similar Recipe Serving</string>
+    <string name="nutrient_name">Nutrient Name</string>
+    <string name="nutrient_amount">Nutrient Amount</string>
+    <string name="nutrient_percent">Nutrient Percent Of Daily Needs</string>
+    <string name="bad">Bad</string>
+    <string name="good">Good</string>
 </resources>
