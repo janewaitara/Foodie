@@ -12,25 +12,41 @@
         tools:layout="@layout/fragment_recipe_list" >
         <action
             android:id="@+id/action_recipeListFragment_to_recipeDetailFragment"
-            app:destination="@id/recipeDetailFragment" />
+            app:destination="@id/recipeDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_recipeListFragment_to_searchRecipeFragment"
-            app:destination="@id/searchRecipeFragment" />
+            app:destination="@id/searchRecipeFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/recipeDetailFragment"
         android:name="com.janewaitara.foodie.ui.recipeDetail.RecipeDetailFragment"
-        android:label="fragment_recipe_detail"
+        android:label="Recipe Detail"
         tools:layout="@layout/fragment_recipe_detail" >
         <argument
             android:name="recipeId"
             app:argType="integer" />
         <action
             android:id="@+id/action_recipeDetailFragment_to_recipeNutritionWidget"
-            app:destination="@id/recipeNutritionWidget" />
+            app:destination="@id/recipeNutritionWidget"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_recipeDetailFragment_to_searchRecipeDetailFragment"
-            app:destination="@id/searchRecipeDetailFragment" />
+            app:destination="@id/searchRecipeDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/searchRecipeFragment"
@@ -42,12 +58,16 @@
             app:argType="string" />
         <action
             android:id="@+id/action_searchRecipeFragment_to_searchRecipeDetailFragment"
-            app:destination="@id/searchRecipeDetailFragment" />
+            app:destination="@id/searchRecipeDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/recipeNutritionWidget"
         android:name="com.janewaitara.foodie.ui.recipeNutrition.RecipeNutritionWidget"
-        android:label="fragment_recipe_nutrition_widget"
+        android:label="Nutrition Widget"
         tools:layout="@layout/fragment_recipe_nutrition_widget" >
         <argument
             android:name="recipeId"
@@ -56,7 +76,7 @@
     <fragment
         android:id="@+id/searchRecipeDetailFragment"
         android:name="com.janewaitara.foodie.ui.recipeDetail.searchRecipeDetails.SearchRecipeDetailFragment"
-        android:label="SearchRecipeDetailFragment" >
+        android:label="Recipe Details" >
         <argument
             android:name="recipeId"
             app:argType="integer" />
