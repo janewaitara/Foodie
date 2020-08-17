@@ -17,6 +17,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.janewaitara.foodie.R
 import com.janewaitara.foodie.networking.NetworkStatusChecker
+import com.janewaitara.foodie.utils.isVisible
 import kotlinx.android.synthetic.main.fragment_recipe_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -130,7 +131,7 @@ class RecipeListFragment : Fragment(), RecipeListAdapter.RecipeListClickListener
     }
 
     private fun getFoodJoke(){
-        networkStatusChecker.performIfConnectedToInternet {
+        networkStatusChecker.performSearchIfConnectedToInternet(::hideFoodJokeContainer) {
             recipeViewModel.getRandomFoodJokeFromApi()
 
             recipeViewModel.getRandomFoodJoke().observe(viewLifecycleOwner, Observer { randomFoodJokeResponse->
@@ -162,4 +163,9 @@ class RecipeListFragment : Fragment(), RecipeListAdapter.RecipeListClickListener
         }
     }
 
+    private fun hideFoodJokeContainer() {
+        food_joke_container1.isVisible(false)
+    }
+
 }
+

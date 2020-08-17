@@ -180,6 +180,7 @@ class SearchRecipeDetailFragment : Fragment() , SimilarRecipeAdapter.SimilarReci
         ingredientRecyclerView.adapter = IngredientsAdapter(recipeInformationResponse.extendedIngredients)
 
         if (!recipeInformationResponse.extendedIngredients.isNullOrEmpty()) {
+            equipmentIsAvailable(true)
             equipmentsRecyclerView.layoutManager =
                 LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
@@ -196,13 +197,13 @@ class SearchRecipeDetailFragment : Fragment() , SimilarRecipeAdapter.SimilarReci
             equipmentsRecyclerView.adapter =
                 EquipmentAdapter(equipmentLists = equipmentList.toSet().toList())
         }else {
-            hideEquipments()
+            equipmentIsAvailable(false)
         }
     }
 
-    private fun hideEquipments() {
-        equipments.isVisible(false)
-        equipmentsRecyclerView.isVisible(false)
+    private fun equipmentIsAvailable(equipmentIsAvailable: Boolean) {
+        equipments.isVisible(equipmentIsAvailable)
+        equipmentsRecyclerView.isVisible(equipmentIsAvailable)
     }
 
     override fun similarRecipeItemClicked(similarRecipeId: Int) {

@@ -11,7 +11,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true"
-
+    android:visibility="invisible"
     android:scrollbars = "vertical"
     android:scrollbarStyle="insideInset"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +58,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/favorites_background"
             android:src="@drawable/ic_favorite"
             android:onClick="addToFavorites"
             android:layout_marginEnd="@dimen/margin_standard"
