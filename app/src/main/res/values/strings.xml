@@ -35,4 +35,5 @@
     <string name="no_internet">No internet</string>
     <string name="directions_unavailable">Instructions are unavailable</string>
     <string name="favorites">Favorites</string>
+    <string name="recipe_cooking_time">14 Mins</string>
 </resources>
