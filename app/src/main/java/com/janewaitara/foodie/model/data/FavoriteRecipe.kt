@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorite_recipes_table")
-class FavoriteRecipes(
+data class FavoriteRecipe(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "recipe title") val title: String,
     @ColumnInfo(name = "recipe image")val image: String?,
