@@ -54,20 +54,22 @@ class RecipeRepository(private val recipeDao: RecipeDao,
 
     suspend fun getRandomFoodJokeFromApi() =
         remoteApi.getRandomFoodJoke()
-
+    
     /**
      * Functions for favorite Recipes*/
-
+    
     suspend fun insertFavoriteRecipe(favoriteRecipe: FavoriteRecipe){
         recipeDao.insertFavRecipe(favoriteRecipe)
     }
-
-    fun getAllFavoriteRecipes(): LiveData<List<FavoriteRecipe>> =
+    
+    fun getAllFavoriteRecipes(): LiveData<List<FavoriteRecipe>> = 
         recipeDao.getFavoriteRecipes()
-
+    
     suspend fun getFavoriteRecipeById(favRecipeId: Int): FavoriteRecipe =
         recipeDao.getFavoriteById(favRecipeId)
-
-    suspend fun clearFavoriteRecipes() = recipeDao.clearFavoriteRecipes()
     
+    suspend fun clearFavoriteRecipes() = recipeDao.clearFavoriteRecipes()
+
+
+
 }
