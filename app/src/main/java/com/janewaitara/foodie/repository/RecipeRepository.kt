@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import com.janewaitara.foodie.RecipeApplication
 import com.janewaitara.foodie.db.RecipeDao
+import com.janewaitara.foodie.model.data.FavoriteRecipe
 import com.janewaitara.foodie.model.data.Recipe
 import com.janewaitara.foodie.model.results.Success
 import com.janewaitara.foodie.networking.RemoteApi
@@ -54,5 +55,19 @@ class RecipeRepository(private val recipeDao: RecipeDao,
     suspend fun getRandomFoodJokeFromApi() =
         remoteApi.getRandomFoodJoke()
 
+    /**
+     * Functions for favorite Recipes*/
 
+    suspend fun insertFavoriteRecipe(favoriteRecipe: FavoriteRecipe){
+        recipeDao.insertFavRecipe(favoriteRecipe)
+    }
+
+    fun getAllFavoriteRecipes(): LiveData<List<FavoriteRecipe>> =
+        recipeDao.getFavoriteRecipes()
+
+    suspend fun getFavoriteRecipeById(favRecipeId: Int): FavoriteRecipe =
+        recipeDao.getFavoriteById(favRecipeId)
+
+    suspend fun clearFavoriteRecipes() = recipeDao.clearFavoriteRecipes()
+    
 }

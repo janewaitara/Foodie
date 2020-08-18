@@ -24,6 +24,8 @@ interface RecipeDao {
     @Query("DELETE FROM recipe_table")
     suspend fun clearRecipes()
 
+    /**
+     * Favorite Recipe functions*/
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertFavRecipe(favoriteRecipe: FavoriteRecipe)
 
@@ -34,6 +36,6 @@ interface RecipeDao {
     suspend fun getFavoriteById(favRecipeId: Int): FavoriteRecipe
 
     @Delete
-    suspend fun clearFavorites(vararg favoriteRecipe: FavoriteRecipe)
+    suspend fun clearFavoriteRecipes(vararg favoriteRecipe: FavoriteRecipe)
 
 }
