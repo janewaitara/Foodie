@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.janewaitara.foodie.repository.RecipeRepository
-import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 /**
@@ -25,7 +24,7 @@ class SynchronizeRecipeWorker(appContext: Context, workerParameters: WorkerParam
         repository.clearRecipes()
 
         return try {
-            repository.getRandomRecipesFromApi()
+            repository.getRandomRecipesFromApiAndInsetIntoDb()
             repository.getRandomFoodJokeFromApi()
 
             Result.success()
