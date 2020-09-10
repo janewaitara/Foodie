@@ -1,5 +1,6 @@
 package com.janewaitara.foodie.repository
 
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import com.janewaitara.foodie.RecipeApplication
@@ -14,6 +15,7 @@ class RecipeRepository(private val recipeDao: RecipeDao,
     private suspend fun insertAllRandomRecipes(recipeList: List<Recipe>){
         if (recipeList.isNotEmpty()) {
             recipeDao.insertAllRandomRecipe(recipeList)
+            Log.d("Data Inserted 8", recipeList.toString())
         }
     }
 
@@ -36,10 +38,15 @@ class RecipeRepository(private val recipeDao: RecipeDao,
     suspend fun getRandomRecipesFromApiAndInsetIntoDb(){
         val randomRecipes = remoteApi.getRandomRecipes()
 
+        Log.d("Data Inserted 5", randomRecipes.toString())
+
         return if (randomRecipes is Success){
+            Log.d("Data Inserted 6", randomRecipes.data.toString())
             insertAllRandomRecipes(randomRecipes.data)
 
+
         }else{
+            Log.d("Data Inserted 7", randomRecipes.toString())
             Toast.makeText(RecipeApplication.getAppContext(), "Failed to fetch tasks!", Toast.LENGTH_SHORT).show()
         }
     }

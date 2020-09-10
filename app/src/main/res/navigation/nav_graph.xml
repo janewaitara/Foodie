@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/recipeListFragment">
+
+    <fragment
+        android:id="@+id/recipeListFragment"
+        android:name="com.janewaitara.foodie.ui.recipeList.RecipeListFragment"
+        android:label="Recipes"
+        tools:layout="@layout/fragment_recipe_list" >
+        <action
+            android:id="@+id/action_recipeListFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_recipeListFragment_to_searchRecipeFragment"
+            app:destination="@id/searchRecipeFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="com.janewaitara.foodie.ui.recipeDetail.RecipeDetailFragment"
+        android:label="Recipe Detail"
+        tools:layout="@layout/fragment_recipe_detail" >
+        <argument
+            android:name="recipeId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_recipeNutritionWidget"
+            app:destination="@id/recipeNutritionWidget"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_searchRecipeDetailFragment"
+            app:destination="@id/searchRecipeDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchRecipeFragment"
+        android:name="com.janewaitara.foodie.ui.searchRecipe.SearchRecipeFragment"
+        android:label="Search {searchParameter} "
+        tools:layout="@layout/fragment_search_recipe" >
+        <argument
+            android:name="searchParameter"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_searchRecipeFragment_to_searchRecipeDetailFragment"
+            app:destination="@id/searchRecipeDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeNutritionWidget"
+        android:name="com.janewaitara.foodie.ui.recipeNutrition.RecipeNutritionWidget"
+        android:label="Nutrition Widget"
+        tools:layout="@layout/fragment_recipe_nutrition_widget" >
+        <argument
+            android:name="recipeId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchRecipeDetailFragment"
+        android:name="com.janewaitara.foodie.ui.recipeDetail.searchRecipeDetails.SearchRecipeDetailFragment"
+        android:label="Recipe Details" >
+        <argument
+            android:name="recipeId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_searchRecipeDetailFragment_self"
+            app:destination="@id/searchRecipeDetailFragment" />
+    </fragment>
+</navigation>

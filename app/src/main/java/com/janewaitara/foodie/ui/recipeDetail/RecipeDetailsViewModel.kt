@@ -23,7 +23,7 @@ class RecipeDetailsViewModel (
     fun getDetailsViewState() : LiveData<DetailsViewState> = detailsViewState
 
     fun getRecipeById(recipeId: Int){
-        detailsViewState.value = Loading
+        detailsViewState.value = DetailsLoading
 
         viewModelScope.launch {
             val recipe = repository.getRecipeById(recipeId)
@@ -54,9 +54,9 @@ class RecipeDetailsViewModel (
     }
 
     /**LiveData member variable to cache the list of similar recipes*/
-    private val similarRecipeLiveData = MutableLiveData<SimilarRecipeResponse>()
+    private val similarRecipeLiveData = MutableLiveData<List<SimilarRecipeResponse>>()
 
-    fun getSimilarRecipesLiveData(): LiveData<SimilarRecipeResponse> = similarRecipeLiveData
+    fun getSimilarRecipesLiveData(): LiveData<List<SimilarRecipeResponse>> = similarRecipeLiveData
 
     fun getSimilarRecipe(recipeId: Int){
         viewModelScope.launch {
@@ -72,7 +72,7 @@ class RecipeDetailsViewModel (
     /**LiveData member variable to cache the ingredients substitute*/
     private val ingredientSubstituteLiveData = MutableLiveData<IngredientSubstitutesResponse>()
 
-    fun getIngredientSubstituteLiveData(): LiveData<SimilarRecipeResponse> = similarRecipeLiveData
+    fun getIngredientSubstituteLiveData(): LiveData<IngredientSubstitutesResponse> = ingredientSubstituteLiveData
 
     fun getIngredientSubstitute(ingredientId: Int){
         viewModelScope.launch {
@@ -87,5 +87,5 @@ class RecipeDetailsViewModel (
 }
 
 sealed class DetailsViewState
-object Loading: DetailsViewState()
+object DetailsLoading: DetailsViewState()
 data class DetailsSuccess(val recipe: Recipe?): DetailsViewState()

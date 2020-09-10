@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">Foodie</string>
+    <string name="food_trivia">Food Trivia</string>
+    <string name="food_joke">Food Joke</string>
+    <string name="share">Share Me</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_note">Make your own food,\n stay at Home</string>
+    <string name="popular_recipes">Popular Recipes</string>
+    <string name="content_description_recipe_image">Recipe Image</string>
+    <string name="recipe_title">Recipe Title</string>
+    <string name="recipe_servings">Recipe Servings</string>
+    <string name="servings">%1$s Servings</string>
+    <string name="serving">%1$s Serving</string>
+    <string name="mins">Mins</string>
+    <string name="health_score">Health \n Score</string>
+    <string name="nutrition">See Nutrition</string>
+    <string name="recipe_ingredients">Ingredients</string>
+    <string name="recipe_directions">Directions</string>
+    <string name="similar_recipes">Similar Recipes</string>
+    <string name="ingredients_title">Ingredients Title</string>
+    <string name="equipments">Equipments</string>
+    <string name="content_description_equipment">Equipment Image</string>
+    <string name="content_description_similar_recipe">Similar Recipe Image</string>
+    <string name="equipments_title">Equipment Title</string>
+    <string name="similar_recipe_title">Similar Title</string>
+    <string name="content_description_ingredients_image">Ingredients Image</string>
+    <string name="nav_header_text">We serve passion</string>
+    <string name="similar_recipes_servings">Similar Recipe Serving</string>
+    <string name="nutrient_name">Nutrient Name</string>
+    <string name="nutrient_amount">Nutrient Amount</string>
+    <string name="nutrient_percent">Nutrient Percent Of Daily Needs</string>
+    <string name="bad">Bad</string>
+    <string name="good">Good</string>
+    <string name="no_internet">No internet</string>
+    <string name="directions_unavailable">Instructions are unavailable</string>
 </resources>

@@ -13,7 +13,7 @@ import kotlinx.android.parcel.Parcelize
 data class Recipe(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "recipe title") val title: String,
-    @ColumnInfo(name = "recipe image")val image: String,
+    @ColumnInfo(name = "recipe image")val image: String?,
     val readyInMinutes: Int,
     val healthScore: Double,
     val servings : Int,

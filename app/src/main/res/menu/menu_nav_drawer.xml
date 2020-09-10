@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/food_trivia"
+       android:title="@string/food_trivia"
+        android:icon="@drawable/foodjoke"/>
+
+    <item android:id="@+id/food_joke"
+       android:title="@string/food_joke"
+        android:icon="@drawable/foodjoke"/>
+
+    <item android:id="@+id/share"
+       android:title="@string/share" />
+
+</menu>
