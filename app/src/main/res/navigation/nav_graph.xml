@@ -83,4 +83,9 @@
             android:id="@+id/action_searchRecipeDetailFragment_self"
             app:destination="@id/searchRecipeDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/favoriteRecipesFragment"
+        android:name="com.janewaitara.foodie.ui.favoriteRecipes.FavoriteRecipesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorite_recipes" />
 </navigation>

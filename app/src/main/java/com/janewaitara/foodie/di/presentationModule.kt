@@ -1,5 +1,6 @@
 package com.janewaitara.foodie.di
 
+import com.janewaitara.foodie.ui.favoriteRecipes.FavoriteRecipeViewModel
 import com.janewaitara.foodie.ui.recipeDetail.RecipeDetailsViewModel
 import com.janewaitara.foodie.ui.recipeList.RecipeListViewModel
 import com.janewaitara.foodie.ui.recipeNutrition.RecipeNutritionViewModel
@@ -14,4 +15,5 @@ val presentationModule = module {
     viewModel { SearchRecipeViewModel(get()) }
     viewModel { RecipeNutritionViewModel(get()) }
     viewModel { SearchRecipeDetailsViewModel(get()) }
+    viewModel { FavoriteRecipeViewModel(get()) }
 }

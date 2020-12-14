@@ -97,6 +97,7 @@ class SearchRecipeFragment : Fragment(), SearchRecipeAdapter.SearchRecipeListCli
 
     private fun displayNoInternetMessage() {
         showNoInternet(true)
+        showLoading(false)
     }
 
     private fun showNoInternet(boolean: Boolean) {

@@ -1,10 +1,8 @@
 package com.janewaitara.foodie.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import com.janewaitara.foodie.model.data.FavoriteRecipe
 import com.janewaitara.foodie.model.data.Recipe
 
 @Dao
@@ -25,4 +23,19 @@ interface RecipeDao {
 
     @Query("DELETE FROM recipe_table")
     suspend fun clearRecipes()
+
+    /**
+     * Favorite Recipe functions*/
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertFavRecipe(favoriteRecipe: FavoriteRecipe)
+
+    @Query("SELECT * FROM favorite_recipes_table ORDER BY `recipe title` ASC")
+    fun getFavoriteRecipes(): LiveData<List<FavoriteRecipe>>
+
+    @Query("SELECT * FROM favorite_recipes_table where id =:favRecipeId")
+    suspend fun getFavoriteById(favRecipeId: Int): FavoriteRecipe
+
+    @Delete
+    suspend fun clearFavoriteRecipes(vararg favoriteRecipe: FavoriteRecipe)
+
 }
